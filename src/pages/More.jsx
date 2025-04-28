@@ -1,8 +1,8 @@
 function More() {
     return (
-      <div className="page-container">
-        <h1>Más Opciones</h1>
-        <p>(Aquí se podrían agregar configuraciones u otras páginas)</p>
+      <div className="page">
+        <h1>More</h1>
+        <p>Additional settings and information here.</p>
       </div>
     );
   }

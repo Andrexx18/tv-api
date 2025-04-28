@@ -1,8 +1,8 @@
 function List() {
     return (
-      <div className="page-container">
-        <h1>Lista Personalizada</h1>
-        <p>(Aquí puedes personalizar tus listas en el futuro)</p>
+      <div className="page">
+        <h1>My List</h1>
+        <p>Here you can organize your shows manually.</p>
       </div>
     );
   }

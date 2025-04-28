@@ -1,33 +1,32 @@
-import { useEffect, useState } from 'react';
-import { fetchShows } from '../services/api';
-import ShowCard from '../components/ShowCard';
+import { useState } from "react";
+import { searchShows } from "../services/api";
+import ShowCard from "../components/ShowCard";
 
 function Search() {
-  const [shows, setShows] = useState([]);
-  const [search, setSearch] = useState('');
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState([]);
 
-  useEffect(() => {
-    fetchShows().then(setShows);
-  }, []);
-
-  const filteredShows = shows.filter(show =>
-    show.name.toLowerCase().includes(search.toLowerCase())
-  );
+  const handleSearch = async (e) => {
+    e.preventDefault();
+    const shows = await searchShows(query);
+    setResults(shows);
+  };
 
   return (
-    <div className="page-container">
-      <h1>Buscar</h1>
-      <input
-        type="text"
-        placeholder="Buscar show..."
-        value={search}
-        onChange={e => setSearch(e.target.value)}
-        className="search-input"
-      />
-      <div className="shows-grid">
-        {filteredShows.map(show => (
-          <ShowCard key={show.id} show={show} />
-        ))}
+    <div className="page">
+      <h1>Search</h1>
+      <form onSubmit={handleSearch}>
+        <input
+          type="text"
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="Search shows..."
+        />
+        <button type="submit">Search</button>
+      </form>
+
+      <div className="grid">
+        {results.map(show => <ShowCard key={show.id} show={show} />)}
       </div>
     </div>
   );

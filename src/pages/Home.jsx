@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
-import { fetchShows } from '../services/api';
-import ShowCard from '../components/ShowCard';
+import { useEffect, useState } from "react";
+import { fetchShows } from "../services/api";
+import ShowCard from "../components/ShowCard";
 
 function Home() {
   const [shows, setShows] = useState([]);
@@ -10,12 +10,10 @@ function Home() {
   }, []);
 
   return (
-    <div className="page-container">
+    <div className="page">
       <h1>Home</h1>
-      <div className="shows-grid">
-        {shows.map(show => (
-          <ShowCard key={show.id} show={show} />
-        ))}
+      <div className="grid">
+        {shows.map(show => <ShowCard key={show.id} show={show} />)}
       </div>
     </div>
   );
