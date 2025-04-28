@@ -1,23 +1,21 @@
-import { useContext } from 'react';
-import { FavoritesContext } from '../context/FavoritesContext';
-import { Link } from 'react-router-dom';
+import { useFavorites } from '../contexts/FavoritesContext';
+import ShowCard from '../components/ShowCard';
 
 function Favorites() {
-  const { favorites } = useContext(FavoritesContext);
+  const { favorites } = useFavorites();
 
   return (
-    <div>
-      <h1>Mis Favoritos</h1>
-      <div className="container">
-        {favorites.map((show) => (
-          <div key={show.id} className="card">
-            <Link to={`/show/${show.id}`}>
-              <img src={show.image?.medium} alt={show.name} />
-              <p>{show.name}</p>
-            </Link>
-          </div>
-        ))}
-      </div>
+    <div className="page-container">
+      <h1>Favoritos</h1>
+      {favorites.length === 0 ? (
+        <p>No tienes favoritos aún.</p>
+      ) : (
+        <div className="shows-grid">
+          {favorites.map(show => (
+            <ShowCard key={show.id} show={show} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }
