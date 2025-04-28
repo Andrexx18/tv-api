@@ -1,22 +1,27 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar';
+import { Routes, Route } from 'react-router-dom';
 import Home from './pages/Home';
 import Detail from './pages/Detail';
 import Favorites from './pages/Favorites';
-import { FavoritesProvider } from './context/FavoritesContext';
+import Search from './pages/Search';
+import Genres from './pages/Genres';
+import MyList from './pages/MyList';
+import Profile from './pages/Profile';
+import Footer from './components/Footer';
 
 function App() {
   return (
-    <FavoritesProvider>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/show/:id" element={<Detail />} />
-          <Route path="/favorites" element={<Favorites />} />
-        </Routes>
-      </Router>
-    </FavoritesProvider>
+    <div className="app-container">
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/show/:id" element={<Detail />} />
+        <Route path="/favorites" element={<Favorites />} />
+        <Route path="/search" element={<Search />} />
+        <Route path="/genres" element={<Genres />} />
+        <Route path="/mylist" element={<MyList />} />
+        <Route path="/profile" element={<Profile />} />
+      </Routes>
+      <Footer />
+    </div>
   );
 }
 

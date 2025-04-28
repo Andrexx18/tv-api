@@ -6,23 +6,24 @@ import { FavoritesContext } from '../context/FavoritesContext';
 function Detail() {
   const { id } = useParams();
   const [show, setShow] = useState(null);
-  const { addFavorite } = useContext(FavoritesContext);
+  const { favorites, addFavorite, removeFavorite } = useContext(FavoritesContext);
 
   useEffect(() => {
     fetchShowById(id).then(data => setShow(data));
   }, [id]);
 
-  if (!show) return <div>Loading...</div>;
+  if (!show) return <p>Cargando...</p>;
+
+  const isFavorite = favorites.some(fav => fav.id === show.id);
 
   return (
-    <div style={{ textAlign: 'center' }}>
+    <div className="detail-container">
       <h1>{show.name}</h1>
       <img src={show.image?.original} alt={show.name} />
       <div dangerouslySetInnerHTML={{ __html: show.summary }} />
-      <p>Language: {show.language}</p>
-      <p>Genres: {show.genres.join(', ')}</p>
-      <p>Premiered: {show.premiered}</p>
-      <button className="button" onClick={() => addFavorite(show)}>Add to Favorites</button>
+      <button onClick={() => isFavorite ? removeFavorite(show.id) : addFavorite(show)}>
+        {isFavorite ? 'Eliminar de Favoritos 🗑️' : 'Añadir a Favoritos ⭐'}
+      </button>
     </div>
   );
 }
